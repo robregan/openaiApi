@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
 
-    "proxy": "http://localhost:3001",
+    "proxy": "https://murmuring-lake-97708.herokuapp.com/",
 
   
   "private": true,
