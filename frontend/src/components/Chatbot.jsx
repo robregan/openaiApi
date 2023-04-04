@@ -60,9 +60,9 @@ const Chat = () => {
           type='text'
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder='Type your message here...'
+          placeholder='Ask me anything!'
         />
-        <button type='submit'>Send</button>
+        <button type='submit'>Send It</button>
       </form>
     </div>
   )
