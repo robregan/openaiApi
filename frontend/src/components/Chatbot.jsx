@@ -11,9 +11,12 @@ const Chat = () => {
 
   const sendMessage = async (userInput) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/chat', {
-        input: userInput,
-      })
+      const response = await axios.post(
+        'https://murmuring-lake-97708.herokuapp.com/api/chat',
+        {
+          input: userInput,
+        }
+      )
       const message = response.data.message
       return message
     } catch (error) {
