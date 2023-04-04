@@ -3,6 +3,10 @@ import cors from 'cors'
 import { config } from 'dotenv'
 import { Configuration, OpenAIApi } from 'openai'
 
+import path from 'path'
+
+// ... (your existing server setup)
+
 config()
 
 const openai = new OpenAIApi(
@@ -14,6 +18,14 @@ const openai = new OpenAIApi(
 const app = express()
 app.use(cors()) // Enable CORS to allow requests from your React app
 app.use(express.json()) // Parse JSON request bodies
+if (process.env.NODE_ENV === 'production') {
+  // Set the static folder
+  app.use(express.static('frontend/build'))
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 app.post('/api/chat', async (req, res) => {
   const { input } = req.body
