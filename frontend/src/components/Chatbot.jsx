@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import ReactHtmlParser from 'react-html-parser'
 
 import Loading from './Loading'
 
@@ -50,9 +51,10 @@ const Chat = () => {
       <div className='messages'>
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.role}`}>
-            {message.content}
+            {ReactHtmlParser(message.content)}
           </div>
         ))}
+
         {isLoading && <Loading />}
       </div>
       <form onSubmit={handleSubmit} className='message-form'>
