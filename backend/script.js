@@ -42,26 +42,6 @@ app.post('/api/chat', async (req, res) => {
   }
 })
 
-app.post('/api/analyze-code', async (req, res) => {
-  const { code } = req.body
-  try {
-    const apiResponse = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'user',
-          content: `Analyze the following code snippet:\n${code}`,
-        },
-      ],
-    })
-    const analysis = apiResponse.data.choices[0].message.content
-    res.json({ analysis })
-  } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: 'Internal server error' })
-  }
-})
-
 const port = process.env.PORT || 3001
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`)

@@ -66,17 +66,9 @@ const Chat = () => {
       setIsLoading(true)
       setMessages([...messages, { role: 'user', content: input }])
       setInput('')
+      inputRef.current.innerText = '' // Clear the input div
 
-      let message
-      if (input.startsWith('Analyze the following code snippet:')) {
-        const code = input
-          .replace('Analyze the following code snippet:', '')
-          .trim()
-        message = await analyzeCode(code)
-      } else {
-        message = await sendMessage(input)
-      }
-
+      const message = await sendMessage(input)
       setIsLoading(false)
 
       if (message) {
@@ -112,22 +104,6 @@ const Chat = () => {
 
   const handleInputChange = () => {
     setInput(inputRef.current.innerText)
-  }
-
-  const analyzeCode = async (code) => {
-    try {
-      const response = await axios.post(
-        'https://murmuring-lake-97708.herokuapp.com/api/analyze-code',
-        {
-          code,
-        }
-      )
-      const analysis = response.data.analysis
-      return analysis
-    } catch (error) {
-      console.error('Error analyzing code:', error)
-      return null
-    }
   }
 
   return (
