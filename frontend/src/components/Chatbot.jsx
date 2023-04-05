@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import ReactHtmlParser from 'react-html-parser'
 
 import Loading from './Loading'
 
