@@ -9,6 +9,8 @@ const Chat = () => {
 
   const [messages, setMessages] = useState([])
 
+  const inputRef = useRef()
+
   const sendMessage = async (userInput) => {
     try {
       const response = await axios.post(
@@ -99,6 +101,10 @@ const Chat = () => {
     }
   }
 
+  const handleInputChange = () => {
+    setInput(inputRef.current.innerText)
+  }
+
   return (
     <div className='chat'>
       <div className='messages'>
@@ -116,7 +122,7 @@ const Chat = () => {
           contentEditable
           ref={inputRef}
           onKeyDown={handleKeyDown}
-          onInput={handleInput}
+          onInput={handleInputChange}
           placeholder='Type your message here...'
         />
 
