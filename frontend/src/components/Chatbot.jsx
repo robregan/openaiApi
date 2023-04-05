@@ -80,7 +80,7 @@ const Chat = () => {
   }
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && e.ctrlKey) {
+    if (e.key === 'Enter' && e.shiftKey) {
       e.preventDefault()
       const current = inputRef.current
       const selection = window.getSelection()
@@ -97,7 +97,7 @@ const Chat = () => {
 
     if (e.key === 'Enter') {
       e.preventDefault()
-      sendMessage()
+      handleSubmit(e)
     }
   }
 
