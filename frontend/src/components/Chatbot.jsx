@@ -50,9 +50,11 @@ const Chat = () => {
     <div className='chat'>
       <div className='messages'>
         {messages.map((message, index) => (
-          <div key={index} className={`message ${message.role}`}>
-            {ReactHtmlParser(message.content)}
-          </div>
+          <div
+            key={index}
+            className={`message ${message.role}`}
+            dangerouslySetInnerHTML={{ __html: message.content }}
+          ></div>
         ))}
 
         {isLoading && <Loading />}
