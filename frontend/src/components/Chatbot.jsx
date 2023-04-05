@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import axios from 'axios'
 
 import Loading from './Loading'
@@ -77,6 +77,28 @@ const Chat = () => {
     }
   }
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && e.ctrlKey) {
+      e.preventDefault()
+      const current = inputRef.current
+      const selection = window.getSelection()
+      const range = selection.getRangeAt(0)
+      const br = document.createElement('br')
+      range.insertNode(br)
+      range.setStartAfter(br)
+      range.setEndAfter(br)
+      range.collapse(false)
+      selection.removeAllRanges()
+      selection.addRange(range)
+      return
+    }
+
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      sendMessage()
+    }
+  }
+
   return (
     <div className='chat'>
       <div className='messages'>
@@ -89,12 +111,15 @@ const Chat = () => {
         {isLoading && <Loading />}
       </div>
       <form onSubmit={handleSubmit} className='message-form'>
-        <input
-          type='text'
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder='Ask me anything!'
+        <div
+          className='input-box'
+          contentEditable
+          ref={inputRef}
+          onKeyDown={handleKeyDown}
+          onInput={handleInput}
+          placeholder='Type your message here...'
         />
+
         <button type='submit'>Send It</button>
       </form>
     </div>

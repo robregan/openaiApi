@@ -101,3 +101,29 @@ h1 {
   margin: 1rem 0;
   line-height: 1.5;
 }
+
+.input-box {
+  flex-grow: 1;
+  padding: 0.5rem;
+  background-color: #495057;
+  border: 1px solid #495057;
+  color: #f8f9fa;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  min-height: 36px;
+  resize: vertical;
+  overflow-y: auto;
+  outline: none;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.input-box:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.input-box:empty:before {
+  content: attr(placeholder);
+  color: #adb5bd;
+}
