@@ -10,6 +10,13 @@ const Chat = () => {
   const [messages, setMessages] = useState([])
 
   const inputRef = useRef()
+  const messagesRef = useRef(null)
+
+  useEffect(() => {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTop = messagesRef.current.scrollHeight
+    }
+  }, [messages])
 
   const sendMessage = async (userInput) => {
     try {
@@ -108,7 +115,7 @@ const Chat = () => {
 
   return (
     <div className='chat'>
-      <div className='messages'>
+      <div className='messages' ref={messagesRef}>
         {messages.map((message, index) => (
           <div key={index} className={`message ${message.role}`}>
             {formatApiResponse(message.content)}
