@@ -66,6 +66,7 @@ const Chat = () => {
       setIsLoading(true)
       setMessages([...messages, { role: 'user', content: input }])
       setInput('')
+      inputRef.current.innerText = '' // Clear the input div
 
       const message = await sendMessage(input)
       setIsLoading(false)
