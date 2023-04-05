@@ -88,3 +88,15 @@ h1 {
   text-align: center;
   color: #5994d3;
 }
+
+.code-snippet {
+  background-color: #495057;
+  color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: monospace;
+  font-size: 0.9rem;
+  margin: 1rem 0;
+}

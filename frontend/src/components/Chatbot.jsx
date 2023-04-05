@@ -25,6 +25,23 @@ const Chat = () => {
     }
   }
 
+  function formatApiResponse(text) {
+    const lines = text.split('\n')
+    return lines.map((line, index) => {
+      if (line.startsWith('```') || line.endsWith('```')) {
+        return null
+      }
+      if (line.startsWith(' ')) {
+        return (
+          <pre key={index} className='code-snippet'>
+            {line}
+          </pre>
+        )
+      }
+      return <p key={index}>{line}</p>
+    })
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -49,11 +66,9 @@ const Chat = () => {
     <div className='chat'>
       <div className='messages'>
         {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`message ${message.role}`}
-            dangerouslySetInnerHTML={{ __html: message.content }}
-          ></div>
+          <div key={index} className={`message ${message.role}`}>
+            {formatApiResponse(message.content)}
+          </div>
         ))}
 
         {isLoading && <Loading />}
