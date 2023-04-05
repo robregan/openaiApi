@@ -27,19 +27,34 @@ const Chat = () => {
 
   function formatApiResponse(text) {
     const lines = text.split('\n')
-    return lines.map((line, index) => {
-      if (line.startsWith('```') || line.endsWith('```')) {
-        return null
+    const formattedLines = []
+
+    let inCodeBlock = false
+    let codeSnippet = ''
+
+    lines.forEach((line, index) => {
+      if (line.startsWith('```')) {
+        inCodeBlock = !inCodeBlock
+        if (!inCodeBlock) {
+          formattedLines.push(
+            <pre key={`code-${index}`} className='code-snippet'>
+              {codeSnippet}
+            </pre>
+          )
+          codeSnippet = ''
+        }
+        return
       }
-      if (line.startsWith(' ')) {
-        return (
-          <pre key={index} className='code-snippet'>
-            {line}
-          </pre>
-        )
+
+      if (inCodeBlock) {
+        codeSnippet += line + '\n'
+        return
       }
-      return <p key={index}>{line}</p>
+
+      formattedLines.push(<p key={`text-${index}`}>{line}</p>)
     })
+
+    return formattedLines
   }
 
   const handleSubmit = async (e) => {
