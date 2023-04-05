@@ -12,11 +12,14 @@ const Chat = () => {
   const inputRef = useRef()
   const messagesRef = useRef(null)
 
-  useEffect(() => {
+  const scrollToBottom = () => {
     if (messagesRef.current) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight
     }
-  }, [messages])
+  }
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, isLoading])
 
   const sendMessage = async (userInput) => {
     try {
