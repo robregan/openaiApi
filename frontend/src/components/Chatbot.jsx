@@ -124,7 +124,7 @@ const Chat = () => {
           ref={inputRef}
           onKeyDown={handleKeyDown}
           onInput={handleInputChange}
-          placeholder='Type your message here...'
+          placeholder='Ask me anything...'
         />
 
         <button type='submit'>Send It</button>
